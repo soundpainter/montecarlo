@@ -1,0 +1,608 @@
+// Generated for: spectre
+// Generated on: Jan 18 12:22:27 2017
+// Design library name: andxSchLib
+// Design cell name: test_aref_analog
+// Design view name: schematic
+simulator lang=spectre
+global 0 VSS! VDD!
+parameters ileak=0 voffset=0 vin=2.4
+include "/home/minjong/svn_eng/andx08/trunk_0_0/pdk/VT-011-CB-SP-002-K3/vis11cb/../skill/../models/cb011sp003_engr.scs" section=bv_6ghd
+include "/home/minjong/svn_eng/andx08/trunk_0_0/pdk/VT-011-CB-SP-002-K3/vis11cb/../skill/../models/cb011sp003_engr.scs" section=mc
+include "/home/minjong/svn_eng/andx08/trunk_0_0/pdk/VT-011-CB-SP-002-K3/models/cb011sp003_engr.scs" section=mismatch
+
+// Library name: std_cell
+// Cell name: INV1
+// View name: schematic
+subckt INV1 ZN I
+    M0 (ZN I VSS! VSS!) nch_hvt l=1.17E-07 w=5.33E-07 m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+    M1 (ZN I VDD! VDD!) pch_hvt l=1.17E-07 w=1.335E-06 m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+ends INV1
+// End of subcircuit definition.
+
+// Library name: andxSchLib
+// Cell name: aref_lvlshft
+// View name: schematic
+subckt aref_lvlshft in out out_b vhigh
+    I0 (lowin in) INV1
+    M6 (net058 out vhigh vhigh) pch6 l=1.2u w=150.0n m=1 ad=8.235e-14 \
+        as=8.235e-14 pd=1.206u ps=1.206u nrd=1.32 nrs=1.32 sa=333.00n \
+        sb=333.00n sd=0
+    M9 (out lowin net057 vhigh) pch6 l=1.2u w=150.0n m=1 ad=8.235e-14 \
+        as=8.235e-14 pd=1.206u ps=1.206u nrd=1.32 nrs=1.32 sa=333.00n \
+        sb=333.00n sd=0
+    M8 (out_b in net058 vhigh) pch6 l=1.2u w=150.0n m=1 ad=8.235e-14 \
+        as=8.235e-14 pd=1.206u ps=1.206u nrd=1.32 nrs=1.32 sa=333.00n \
+        sb=333.00n sd=0
+    M3 (net057 out_b vhigh vhigh) pch6 l=1.2u w=150.0n m=1 ad=8.235e-14 \
+        as=8.235e-14 pd=1.206u ps=1.206u nrd=1.32 nrs=1.32 sa=333.00n \
+        sb=333.00n sd=0
+    M5 (out_b in VSS! VSS!) nch6 l=700n w=2u m=2 ad=6.24e-13 as=6.24e-13 \
+        pd=4.624u ps=4.624u nrd=0.0885 nrs=0.0885 sa=312.00n sb=312.00n \
+        sd=0
+    M2 (out lowin VSS! VSS!) nch6 l=700n w=2u m=2 ad=6.24e-13 as=6.24e-13 \
+        pd=4.624u ps=4.624u nrd=0.0885 nrs=0.0885 sa=312.00n sb=312.00n \
+        sd=0
+ends aref_lvlshft
+// End of subcircuit definition.
+
+// Library name: andxSchLib
+// Cell name: ats_np_compare_minjong_eco3
+// View name: schematic
+subckt ats_np_compare_minjong_eco3 en_vdd iref\<1\> iref\<0\> minus out \
+        plus sply
+    M25 (pgate sply net0326 VSS!) nch6 l=1u w=200n m=1 ad=8.55e-14 \
+        as=8.55e-14 pd=1.206u ps=1.206u nrd=0.99 nrs=0.99 sa=333.00n \
+        sb=333.00n sd=0
+    M26 (ngate sply net0325 VSS!) nch6 l=1u w=200n m=1 ad=8.55e-14 \
+        as=8.55e-14 pd=1.206u ps=1.206u nrd=0.99 nrs=0.99 sa=333.00n \
+        sb=333.00n sd=0
+    M35dummy (net0287 sply sply sply) pch6 l=2u w=4u m=1 ad=1.248e-12 \
+        as=1.248e-12 pd=8.624u ps=8.624u nrd=0.04425 nrs=0.04425 \
+        sa=312.00n sb=312.00n sd=0
+    M36dummy (net0343 sply sply sply) pch6 l=2u w=4u m=1 ad=1.248e-12 \
+        as=1.248e-12 pd=8.624u ps=8.624u nrd=0.04425 nrs=0.04425 \
+        sa=312.00n sb=312.00n sd=0
+    M51dummy (sply sply net0287 sply) pch6 l=600n w=2u m=2 ad=3.54e-13 \
+        as=6.24e-13 pd=2.354u ps=4.624u nrd=0.0885 nrs=0.0885 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M68 (sply sply net0343 sply) pch6 l=600n w=2u m=2 ad=3.54e-13 \
+        as=6.24e-13 pd=2.354u ps=4.624u nrd=0.0885 nrs=0.0885 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M43 (net0313 en_sply sply sply) pch6 l=600n w=1u m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+    M13 (net0338 net0313 sply sply) pch6 l=2u w=5u m=4 ad=8.85e-13 \
+        as=1.2225e-12 pd=5.354u ps=7.989u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M42 (net0306 en_sply sply sply) pch6 l=600n w=1u m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+    M49 (net0301 net0282 net0343 sply) pch6 l=600n w=2u m=2 ad=3.54e-13 \
+        as=6.24e-13 pd=2.354u ps=4.624u nrd=0.0885 nrs=0.0885 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M62 (net0307 en_sply sply sply) pch6 l=600n w=1u m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+    M19 (net0309 net0307 net0313 net0313) pch6 l=2u w=2u m=1 ad=6.24e-13 \
+        as=6.24e-13 pd=4.624u ps=4.624u nrd=0.0885 nrs=0.0885 sa=312.00n \
+        sb=312.00n sd=0
+    M20 (out pgate sply sply) pch6 l=1u w=8u m=1 ad=2.496e-12 as=2.496e-12 \
+        pd=16.624u ps=16.624u nrd=0.022125 nrs=0.022125 sa=312.00n \
+        sb=312.00n sd=0
+    M33 (net0306 net0306 sply sply) pch6 l=2u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M15 (net0313 net0306 net0337 sply) pch6 l=600n w=5u m=2 ad=8.85e-13 \
+        as=1.56e-12 pd=5.354u ps=10.624u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M41 (net0288 en_sply sply sply) pch6 l=600n w=1u m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+    M40 (pgate en_sply sply sply) pch6 l=600n w=1u m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+    M36 (net0343 net0288 sply sply) pch6 l=2u w=4u m=1 ad=1.248e-12 \
+        as=1.248e-12 pd=8.624u ps=8.624u nrd=0.04425 nrs=0.04425 \
+        sa=312.00n sb=312.00n sd=0
+    M35 (net0287 net0288 sply sply) pch6 l=2u w=4u m=1 ad=1.248e-12 \
+        as=1.248e-12 pd=8.624u ps=8.624u nrd=0.04425 nrs=0.04425 \
+        sa=312.00n sb=312.00n sd=0
+    M11 (net0337 net0313 sply sply) pch6 l=2u w=5u m=4 ad=8.85e-13 \
+        as=1.2225e-12 pd=5.354u ps=7.989u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M7 (net0350 net0288 sply sply) pch6 l=2u w=4u m=6 ad=7.08e-13 \
+        as=8.88e-13 pd=4.354u ps=5.777333u nrd=0.04425 nrs=0.04425 \
+        sa=312.00n sb=312.00n sd=354.00n
+    M51 (net0288 net0282 net0287 sply) pch6 l=600n w=2u m=2 ad=3.54e-13 \
+        as=6.24e-13 pd=2.354u ps=4.624u nrd=0.0885 nrs=0.0885 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M52 (net0282 net0282 sply sply) pch6 l=2u w=1u m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+    M50 (net0291 net0282 net0350 sply) pch6 l=600n w=2u m=12 ad=3.54e-13 \
+        as=3.99e-13 pd=2.354u ps=2.732333u nrd=0.0885 nrs=0.0885 \
+        sa=312.00n sb=312.00n sd=354.00n
+    M14 (pgate net0306 net0338 sply) pch6 l=600n w=5u m=2 ad=8.85e-13 \
+        as=1.56e-12 pd=5.354u ps=10.624u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    MdumP (net0291 net0291 net0291 net0291) pch6 l=600n w=5u m=4 \
+        ad=8.85e-13 as=1.2225e-12 pd=5.354u ps=7.989u nrd=0.0354 \
+        nrs=0.0354 sa=312.00n sb=312.00n sd=354.00n
+    M32 (net0307 net0307 net0306 net0306) pch6 l=600n w=400n m=1 \
+        ad=1.248e-13 as=1.248e-13 pd=1.424u ps=1.424u nrd=0.4425 \
+        nrs=0.4425 sa=312.00n sb=312.00n sd=0
+    M18 (ngate net0307 pgate pgate) pch6 l=2u w=2u m=1 ad=6.24e-13 \
+        as=6.24e-13 pd=4.624u ps=4.624u nrd=0.0885 nrs=0.0885 sa=312.00n \
+        sb=312.00n sd=0
+    M3 (net0336 minus net0291 net0291) pch6_mat l=600n w=5u m=4 ad=8.85e-13 \
+        as=1.2225e-12 pd=5.354u ps=7.989u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M58 (net0282 en_sply sply sply) pch6 l=600n w=1u m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+    M6 (net0339 plus net0291 net0291) pch6_mat l=600n w=5u m=4 ad=8.85e-13 \
+        as=1.2225e-12 pd=5.354u ps=7.989u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M56dummy (VSS! VSS! net0335 VSS!) nch6 l=700n w=1.25u m=2 \
+        ad=2.2125e-13 as=3.9e-13 pd=1.604u ps=3.124u nrd=0.1416 nrs=0.1416 \
+        sa=312.00n sb=312.00n sd=354.00n
+    M54 (net0271 net0271 VSS! VSS!) nch6 l=2u w=600n m=1 ad=1.872e-13 \
+        as=1.872e-13 pd=1.824u ps=1.824u nrd=0.295 nrs=0.295 sa=312.00n \
+        sb=312.00n sd=0
+    M60dummy (VSS! VSS! net0340 VSS!) nch6 l=700n w=1.25u m=2 \
+        ad=2.2125e-13 as=3.9e-13 pd=1.604u ps=3.124u nrd=0.1416 nrs=0.1416 \
+        sa=312.00n sb=312.00n sd=354.00n
+    M4 (net0351 net0276 VSS! VSS!) nch6 l=2u w=2.5u m=6 ad=4.425e-13 \
+        as=5.55e-13 pd=2.854u ps=3.777333u nrd=0.0708 nrs=0.0708 \
+        sa=312.00n sb=312.00n sd=354.00n
+    M53 (net0276 net0271 net0332 VSS!) nch6 l=2u w=2.5u m=2 ad=4.425e-13 \
+        as=7.8e-13 pd=2.854u ps=5.624u nrd=0.0708 nrs=0.0708 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M12 (net0340 net0276 VSS! VSS!) nch6 l=2u w=2.5u m=1 ad=7.8e-13 \
+        as=7.8e-13 pd=5.624u ps=5.624u nrd=0.0708 nrs=0.0708 sa=312.00n \
+        sb=312.00n sd=0
+    M48 (net0334 net0276 VSS! VSS!) nch6 l=2u w=2.5u m=1 ad=7.8e-13 \
+        as=7.8e-13 pd=5.624u ps=5.624u nrd=0.0708 nrs=0.0708 sa=312.00n \
+        sb=312.00n sd=0
+    M63dummy (VSS! VSS! net0332 VSS!) nch6 l=2u w=2.5u m=2 ad=4.425e-13 \
+        as=7.8e-13 pd=2.854u ps=5.624u nrd=0.0708 nrs=0.0708 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M5 (net0332 net0276 VSS! VSS!) nch6 l=2u w=2.5u m=2 ad=4.425e-13 \
+        as=7.8e-13 pd=2.854u ps=5.624u nrd=0.0708 nrs=0.0708 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M0 (net0339 net0309 VSS! VSS! sply) nch6_mat l=4u w=5u m=2 ad=8.85e-13 \
+        as=1.56e-12 pd=5.354u ps=10.624u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M31 (net0300 net0300 VSS! VSS!) nch6 l=3u w=200n m=1 ad=8.55e-14 \
+        as=8.55e-14 pd=1.206u ps=1.206u nrd=0.99 nrs=0.99 sa=333.00n \
+        sb=333.00n sd=0
+    M8 (net0336 net0309 VSS! VSS! sply) nch6_mat l=4u w=5u m=2 ad=8.85e-13 \
+        as=1.56e-12 pd=5.354u ps=10.624u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M34 (net0335 net0276 VSS! VSS!) nch6 l=2u w=2.5u m=1 ad=7.8e-13 \
+        as=7.8e-13 pd=5.624u ps=5.624u nrd=0.0708 nrs=0.0708 sa=312.00n \
+        sb=312.00n sd=0
+    M21 (out ngate VSS! VSS!) nch6 l=2u w=8u m=1 ad=2.496e-12 as=2.496e-12 \
+        pd=16.624u ps=16.624u nrd=0.022125 nrs=0.022125 sa=312.00n \
+        sb=312.00n sd=0
+    M2 (net0338 plus net0293 VSS! sply) nch6_mat l=700n w=5u m=2 ad=8.85e-13 \
+        as=1.56e-12 pd=5.354u ps=10.624u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M1 (net0337 minus net0293 VSS! sply) nch6_mat l=700n w=5u m=2 ad=8.85e-13 \
+        as=1.56e-12 pd=5.354u ps=10.624u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M17 (net0313 net0301 net0309 VSS!) nch6 l=4u w=2u m=1 ad=6.24e-13 \
+        as=6.24e-13 pd=4.624u ps=4.624u nrd=0.0885 nrs=0.0885 sa=312.00n \
+        sb=312.00n sd=0
+    M16 (pgate net0301 ngate VSS!) nch6 l=4u w=2u m=1 ad=6.24e-13 \
+        as=6.24e-13 pd=4.624u ps=4.624u nrd=0.0885 nrs=0.0885 sa=312.00n \
+        sb=312.00n sd=0
+    M63 (net0300 en_b_sply VSS! VSS!) nch6 l=700n w=1u m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+    MdumN (net0293 VSS! VSS! VSS!) nch6 l=700n w=5u m=4 ad=8.85e-13 \
+        as=1.2225e-12 pd=5.354u ps=7.989u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M57 (net0271 en_b_sply VSS! VSS!) nch6 l=700n w=1u m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+    M60 (net0307 net0271 net0340 VSS!) nch6 l=700n w=1.25u m=2 \
+        ad=2.2125e-13 as=3.9e-13 pd=1.604u ps=3.124u nrd=0.1416 nrs=0.1416 \
+        sa=312.00n sb=312.00n sd=354.00n
+    M55dummy (VSS! VSS! net0334 VSS!) nch6 l=700n w=1.25u m=2 \
+        ad=2.2125e-13 as=3.9e-13 pd=1.604u ps=3.124u nrd=0.1416 nrs=0.1416 \
+        sa=312.00n sb=312.00n sd=354.00n
+    M12dummy (net0340 VSS! VSS! VSS!) nch6 l=2u w=2.5u m=1 ad=7.8e-13 \
+        as=7.8e-13 pd=5.624u ps=5.624u nrd=0.0708 nrs=0.0708 sa=312.00n \
+        sb=312.00n sd=0
+    M48dummy (net0334 VSS! VSS! VSS!) nch6 l=2u w=2.5u m=1 ad=7.8e-13 \
+        as=7.8e-13 pd=5.624u ps=5.624u nrd=0.0708 nrs=0.0708 sa=312.00n \
+        sb=312.00n sd=0
+    M24 (ngate en_b_sply VSS! VSS!) nch6 l=700n w=1u m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+    M22 (net0309 net0300 net0336 VSS!) nch6 l=1u w=5u m=2 ad=8.85e-13 \
+        as=1.56e-12 pd=5.354u ps=10.624u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M30 (net0301 net0301 net0300 VSS!) nch6 l=700n w=2u m=1 ad=6.24e-13 \
+        as=6.24e-13 pd=4.624u ps=4.624u nrd=0.0885 nrs=0.0885 sa=312.00n \
+        sb=312.00n sd=0
+    M37 (net0276 en_b_sply VSS! VSS!) nch6 l=700n w=1u m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+    M34dummy (net0335 VSS! VSS! VSS!) nch6 l=2u w=2.5u m=1 ad=7.8e-13 \
+        as=7.8e-13 pd=5.624u ps=5.624u nrd=0.0708 nrs=0.0708 sa=312.00n \
+        sb=312.00n sd=0
+    M55 (net0282 net0271 net0334 VSS!) nch6 l=700n w=1.25u m=2 \
+        ad=2.2125e-13 as=3.9e-13 pd=1.604u ps=3.124u nrd=0.1416 nrs=0.1416 \
+        sa=312.00n sb=312.00n sd=354.00n
+    M23 (ngate net0300 net0339 VSS!) nch6 l=1u w=5u m=2 ad=8.85e-13 \
+        as=1.56e-12 pd=5.354u ps=10.624u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M39 (net0309 en_b_sply VSS! VSS!) nch6 l=700n w=1u m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+    M38 (net0301 en_b_sply VSS! VSS!) nch6 l=700n w=1u m=1 ad=3.12e-13 \
+        as=3.12e-13 pd=2.624u ps=2.624u nrd=0.177 nrs=0.177 sa=312.00n \
+        sb=312.00n sd=0
+    M5dummy (net0332 VSS! VSS! VSS!) nch6 l=2u w=2.5u m=2 ad=4.425e-13 \
+        as=7.8e-13 pd=2.854u ps=5.624u nrd=0.0708 nrs=0.0708 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M59 (net0293 net0271 net0351 VSS!) nch6 l=700n w=1.25u m=12 \
+        ad=2.2125e-13 as=2.49375e-13 pd=1.604u ps=1.857333u nrd=0.1416 \
+        nrs=0.1416 sa=312.00n sb=312.00n sd=354.00n
+    M56 (net0288 net0271 net0335 VSS!) nch6 l=700n w=1.25u m=2 \
+        ad=2.2125e-13 as=3.9e-13 pd=1.604u ps=3.124u nrd=0.1416 nrs=0.1416 \
+        sa=312.00n sb=312.00n sd=354.00n
+    M29 (net0326 out net0326 net0326) pch6 l=6u w=5u m=5 ad=1.56e-12 \
+        as=1.56e-12 pd=10.624u ps=10.624u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=0
+    M27 (net0326 VSS! pgate sply) pch6 l=1u w=200n m=1 ad=8.55e-14 \
+        as=8.55e-14 pd=1.206u ps=1.206u nrd=0.99 nrs=0.99 sa=333.00n \
+        sb=333.00n sd=0
+    M9 (net0276 en_b_sply iref\<1\> sply) pch6 l=600n w=500n m=1 \
+        ad=1.56e-13 as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 \
+        sa=312.00n sb=312.00n sd=0
+    M47 (net0271 en_b_sply iref\<0\> sply) pch6 l=600n w=500n m=1 \
+        ad=1.56e-13 as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 \
+        sa=312.00n sb=312.00n sd=0
+    M46 (out net0325 out out) pch6 l=5u w=6u m=5 ad=1.872e-12 as=1.872e-12 \
+        pd=12.624u ps=12.624u nrd=0.0295 nrs=0.0295 sa=312.00n sb=312.00n \
+        sd=0
+    M28 (net0325 VSS! ngate sply) pch6 l=1u w=200n m=1 ad=8.55e-14 \
+        as=8.55e-14 pd=1.206u ps=1.206u nrd=0.99 nrs=0.99 sa=333.00n \
+        sb=333.00n sd=0
+    I4 (en_vdd en_sply en_b_sply sply) aref_lvlshft
+ends ats_np_compare_minjong_eco3
+// End of subcircuit definition.
+
+// Library name: andxSchLib
+// Cell name: aref_ncompare
+// View name: schematic
+subckt aref_ncompare en_vdd out plus sply
+    M13 (VSS! VSS! net14 VSS!) nch6 l=1u w=5u m=4 ad=8.85e-13 \
+        as=1.2225e-12 pd=5.354u ps=7.989u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M8 (net027 en_b_sply VSS! VSS!) nch6 l=1u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M7 (net027 net027 VSS! VSS!) nch6 l=2u w=5u m=2 ad=8.85e-13 \
+        as=1.56e-12 pd=5.354u ps=10.624u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M6 (out net027 VSS! VSS!) nch6 l=2u w=5u m=2 ad=8.85e-13 as=1.56e-12 \
+        pd=5.354u ps=10.624u nrd=0.0354 nrs=0.0354 sa=312.00n sb=312.00n \
+        sd=354.00n
+    M2 (net14 net027 VSS! VSS!) nch6 l=2u w=5u m=2 ad=8.85e-13 as=1.56e-12 \
+        pd=5.354u ps=10.624u nrd=0.0354 nrs=0.0354 sa=312.00n sb=312.00n \
+        sd=354.00n
+    M4 (net18 plus net14 VSS!) nch6 l=1u w=5u m=4 ad=8.85e-13 \
+        as=1.2225e-12 pd=5.354u ps=7.989u nrd=0.0354 nrs=0.0354 sa=312.00n \
+        sb=312.00n sd=354.00n
+    M3 (net15 out net14 VSS!) nch6 l=1u w=5u m=4 ad=8.85e-13 as=1.2225e-12 \
+        pd=5.354u ps=7.989u nrd=0.0354 nrs=0.0354 sa=312.00n sb=312.00n \
+        sd=354.00n
+    M12 (net18 en_sply sply sply) pch6 l=2u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M9 (net027 en_b_sply net26 sply) pch6 l=9u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M10 (net26 VSS! sply sply) pch6 l=9u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M11 (out net18 sply sply) pch6 l=2u w=10u m=4 ad=1.77e-12 as=2.445e-12 \
+        pd=10.354u ps=15.489u nrd=0.0177 nrs=0.0177 sa=312.00n sb=312.00n \
+        sd=354.00n
+    M0 (net18 net15 sply sply) pch6 l=2u w=5u m=2 ad=8.85e-13 as=1.56e-12 \
+        pd=5.354u ps=10.624u nrd=0.0354 nrs=0.0354 sa=312.00n sb=312.00n \
+        sd=354.00n
+    M5 (net15 net15 sply sply) pch6 l=2u w=5u m=2 ad=8.85e-13 as=1.56e-12 \
+        pd=5.354u ps=10.624u nrd=0.0354 nrs=0.0354 sa=312.00n sb=312.00n \
+        sd=354.00n
+    I4 (en_vdd en_sply en_b_sply sply) aref_lvlshft
+ends aref_ncompare
+// End of subcircuit definition.
+
+// Library name: andxSchLib
+// Cell name: aref_anamux_dual
+// View name: schematic
+subckt aref_anamux_dual ana_out_a ana_out_b in_a\<0\> in_a\<1\> in_a\<2\> \
+        in_a\<3\> in_b\<0\> in_b\<1\> in_b\<2\> in_b\<3\> sel\<3\> \
+        sel\<2\> sel\<1\> sel\<0\> sply
+    M11 (ana_out_b net023 in_b\<3\> VSS!) nch6 l=1u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M9 (ana_out_b net9 in_b\<0\> VSS!) nch6 l=1u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M8 (ana_out_b net11 in_b\<1\> VSS!) nch6 l=1u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M6 (ana_out_b net13 in_b\<2\> VSS!) nch6 l=1u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M4 (ana_out_a net023 in_a\<3\> VSS!) nch6 l=1u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M3 (ana_out_a net9 in_a\<0\> VSS!) nch6 l=1u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M0 (ana_out_a net11 in_a\<1\> VSS!) nch6 l=1u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M7 (ana_out_a net13 in_a\<2\> VSS!) nch6 l=1u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M15 (ana_out_b net024 in_b\<3\> sply) pch6 l=1.2u w=500n m=1 \
+        ad=1.56e-13 as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 \
+        sa=312.00n sb=312.00n sd=0
+    M14 (ana_out_b net10 in_b\<0\> sply) pch6 l=1.2u w=500n m=1 \
+        ad=1.56e-13 as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 \
+        sa=312.00n sb=312.00n sd=0
+    M13 (ana_out_b net12 in_b\<1\> sply) pch6 l=1.2u w=500n m=1 \
+        ad=1.56e-13 as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 \
+        sa=312.00n sb=312.00n sd=0
+    M12 (ana_out_b net14 in_b\<2\> sply) pch6 l=1.2u w=500n m=1 \
+        ad=1.56e-13 as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 \
+        sa=312.00n sb=312.00n sd=0
+    M5 (ana_out_a net024 in_a\<3\> sply) pch6 l=1.2u w=500n m=1 \
+        ad=1.56e-13 as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 \
+        sa=312.00n sb=312.00n sd=0
+    M2 (ana_out_a net10 in_a\<0\> sply) pch6 l=1.2u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M1 (ana_out_a net12 in_a\<1\> sply) pch6 l=1.2u w=500n m=1 ad=1.56e-13 \
+        as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 sa=312.00n \
+        sb=312.00n sd=0
+    M10 (ana_out_a net14 in_a\<2\> sply) pch6 l=1.2u w=500n m=1 \
+        ad=1.56e-13 as=1.56e-13 pd=1.624u ps=1.624u nrd=0.354 nrs=0.354 \
+        sa=312.00n sb=312.00n sd=0
+    Ilvlshft_3 (sel\<3\> net023 net024 sply) aref_lvlshft
+    Ilvlshft_0 (sel\<0\> net9 net10 sply) aref_lvlshft
+    Ilvlshft_2 (sel\<2\> net13 net14 sply) aref_lvlshft
+    Ilvlshft_1 (sel\<1\> net11 net12 sply) aref_lvlshft
+ends aref_anamux_dual
+// End of subcircuit definition.
+
+// Library name: andx04_a0_sch_minjong
+// Cell name: aref_dpot
+// View name: schematic
+subckt aref_dpot_schematic bl bm br sel\<3\> sel\<2\> sel\<1\> sel\<0\> \
+        sply tl tm tr
+Rdummy\<0\> (VSS! VSS! VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rdummy\<1\> (VSS! VSS! VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<0\> (tnode\<1\> tl VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<1\> (tnode\<2\> tnode\<1\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<2\> (tnode\<3\> tnode\<2\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<3\> (tnode\<4\> tnode\<3\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<4\> (tnode\<5\> tnode\<4\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<5\> (tnode\<6\> tnode\<5\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<6\> (tnode\<7\> tnode\<6\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<7\> (tnode\<8\> tnode\<7\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<8\> (tnode\<9\> tnode\<8\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<9\> (tnode\<10\> tnode\<9\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<10\> (tnode\<11\> tnode\<10\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<11\> (tnode\<12\> tnode\<11\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<12\> (tnode\<13\> tnode\<12\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<13\> (tnode\<14\> tnode\<13\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<14\> (tnode\<15\> tnode\<14\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<15\> (tnode\<16\> tnode\<15\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<16\> (tnode\<17\> tnode\<16\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<17\> (tnode\<18\> tnode\<17\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<18\> (tnode\<19\> tnode\<18\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<19\> (tnode\<20\> tnode\<19\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<20\> (tnode\<21\> tnode\<20\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<21\> (tnode\<22\> tnode\<21\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<22\> (tnode\<23\> tnode\<22\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<23\> (tnode\<24\> tnode\<23\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<24\> (tnode\<25\> tnode\<24\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<25\> (tnode\<26\> tnode\<25\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<26\> (tnode\<27\> tnode\<26\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<27\> (tnode\<28\> tnode\<27\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<28\> (tnode\<29\> tnode\<28\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<29\> (tnode\<30\> tnode\<29\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<30\> (tnode\<31\> tnode\<30\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<31\> (tnode\<32\> tnode\<31\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<32\> (tnode\<33\> tnode\<32\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<33\> (tnode\<34\> tnode\<33\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<34\> (tnode\<35\> tnode\<34\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rtop\<35\> (tr tnode\<35\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<0\> (bnode\<1\> bl VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<1\> (bnode\<2\> bnode\<1\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<2\> (bnode\<3\> bnode\<2\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<3\> (bnode\<4\> bnode\<3\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<4\> (bnode\<5\> bnode\<4\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<5\> (bnode\<6\> bnode\<5\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<6\> (bnode\<7\> bnode\<6\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<7\> (bnode\<8\> bnode\<7\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<8\> (bnode\<9\> bnode\<8\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<9\> (bnode\<10\> bnode\<9\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<10\> (bnode\<11\> bnode\<10\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<11\> (bnode\<12\> bnode\<11\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<12\> (bnode\<13\> bnode\<12\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<13\> (bnode\<14\> bnode\<13\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<14\> (bnode\<15\> bnode\<14\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<15\> (bnode\<16\> bnode\<15\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<16\> (bnode\<17\> bnode\<16\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<17\> (bnode\<18\> bnode\<17\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<18\> (bnode\<19\> bnode\<18\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<19\> (bnode\<20\> bnode\<19\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<20\> (bnode\<21\> bnode\<20\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<21\> (bnode\<22\> bnode\<21\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<22\> (bnode\<23\> bnode\<22\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<23\> (bnode\<24\> bnode\<23\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<24\> (bnode\<25\> bnode\<24\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<25\> (bnode\<26\> bnode\<25\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<26\> (bnode\<27\> bnode\<26\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<27\> (bnode\<28\> bnode\<27\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<28\> (bnode\<29\> bnode\<28\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<29\> (bnode\<30\> bnode\<29\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<30\> (bnode\<31\> bnode\<30\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<31\> (bnode\<32\> bnode\<31\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<32\> (bnode\<33\> bnode\<32\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<33\> (bnode\<34\> bnode\<33\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<34\> (bnode\<35\> bnode\<34\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+Rbot\<35\> (br bnode\<35\> VSS! ) rppo1rpo l=10u w=900n m=1
+
+    Ianamux_dual (bm tm bnode\<18\> bnode\<12\> bnode\<9\> bnode\<6\> \
+        tnode\<18\> tnode\<12\> tnode\<9\> tnode\<6\> sel\<3\> sel\<2\> \
+        sel\<1\> sel\<0\> sply) aref_anamux_dual
+ends aref_dpot_schematic
+// End of subcircuit definition.
+
+// Library name: andx04_a0_sch_minjong
+// Cell name: aref_offset
+// View name: schematic
+subckt aref_offset_schematic aref_out bg en_vdd gain_sel\<3\> \
+        gain_sel\<2\> gain_sel\<1\> gain_sel\<0\> in iref\<1\> iref\<0\> \
+        sply6 splyres
+    Inpcomp (en_vdd iref\<1\> iref\<0\> net17 aref_out net12 sply6) \
+        ats_np_compare_minjong_eco3
+    Incomp (en_vdd in_buf in sply6) aref_ncompare
+    Iaref_dpot (in_buf net12 VSS! gain_sel\<3\> gain_sel\<2\> \
+        gain_sel\<1\> gain_sel\<0\> splyres bg net17 aref_out) \
+        aref_dpot_schematic
+ends aref_offset_schematic
+// End of subcircuit definition.
+
+// Library name: andxSchLib
+// Cell name: test_aref_analog
+// View name: schematic
+Iaref_dividemux (aref hi hi lo lo lo hi vin net15\<0\> net15\<1\> net3 \
+        net011) aref_offset_schematic
+V3 (VSS! 0) vsource dc=0 type=dc
+V2 (lo 0) vsource dc=0 type=dc
+I5\<1\> (0 net15\<0\>) isource dc=2u type=pwl wave=[ 0 0 1u 2u ]
+I5\<0\> (0 net15\<1\>) isource dc=2u type=pwl wave=[ 0 0 1u 2u ]
+V7 (net011 0) vsource dc=4.5 type=pwl wave=[ 0 0 500n 4.5 ]
+V5 (net3 0) vsource dc=4.5 type=pwl wave=[ 0 0 500n 4.5 ]
+V4 (VDD! 0) vsource dc=1.2 type=pwl wave=[ 0 0 500n 1.2 ]
+V1 (hi 0) vsource dc=1.2 type=pwl wave=[ 0 0 500n 1.2 ]
+V6 (vin 0) vsource dc=vin type=pwl wave=[ 10u 1.2 50u 2.4 90u 1.2 ]
+simulatorOptions options reltol=1e-3 vabstol=1e-6 iabstol=1e-12 temp=25.0 \
+    tnom=27 scalem=1.0 scale=1.0 gmin=1e-12 rforce=1 maxnotes=5 maxwarns=5 \
+    digits=5 cols=80 pivrel=1e-3 sensfile="../psf/sens.output" \
+    checklimitdest=psf 
+//dcOp dc write="spectre.dc" maxiters=150 maxsteps=10000 annotate=status
+//dcOpInfo info what=oppoint where=rawfile
+//dc dc param=vin start=1.2 stop=2.4 oppoint=rawfile maxiters=150 \
+//    maxsteps=10000 annotate=status
+// diff-input pair
+statistics {
+  correlate dev=[Iaref_dividemux.Inpcomp.M3 Iaref_dividemux.Inpcomp.M6] param=[random1_pch6_mat random2_pch6_mat] cc=0.75
+}
+statistics {
+  correlate dev=[Iaref_dividemux.Inpcomp.M1 Iaref_dividemux.Inpcomp.M2] param=[random1_nch6_mat random2_nch6_mat] cc=0.75
+}
+statistics {
+  correlate dev=[Iaref_dividemux.Inpcomp.M0 Iaref_dividemux.Inpcomp.M8] param=[random1_nch6_mat random2_nch6_mat] cc=0.75
+}
+
+mc1 montecarlo variations=all numruns=100 savefamilyplots=yes {
+  dcvin dc param=vin start=1.2 stop=2.4 oppoint=rawfile mmaxiters=150 \
+    maxsteps=10000 annotate=status
+}
+modelParameter info what=models where=rawfile
+element info what=inst where=rawfile
+outputParameter info what=output where=rawfile
+designParamVals info what=parameters where=rawfile
+primitives info what=primitives where=rawfile
+subckts info what=subckts where=rawfile
+saveOptions options save=allpub
